@@ -2,6 +2,11 @@
 	cli aplication to create preference workspace in vscode
 	default make a dir to work
 	save a file json in workspaces and add a name
+	TODO: add in new proget 
+	TODO: -g initialization file .gitignore
+	TODO: --list list the configs with name and path
+	TODO: hacer una funcion para ejecutar los comandos por medio de condicionales
+	TODO: hacer que el paramatro add funcione si se incluye el parametro name
 """
 
 import argparse
@@ -35,6 +40,11 @@ def cli():
 		help="add a file config vscode"
 	)
 	parser.add_argument(
+		"--remove",
+		required=False,
+		help="remove config with name"
+	)
+	parser.add_argument(
 		"--list",
 		required=False,
 		help="Get a list of name of configs exists",
@@ -50,7 +60,8 @@ def cli():
 def main():
 	args = cli()
 	conf = CreateConfig()
-	conf.add_config_json(args.add, args.name)
+	conf.remove_config_json(args.remove)
+	#conf.add_config_json(args.add, args.name)
 
 if __name__ == '__main__':
 	main()

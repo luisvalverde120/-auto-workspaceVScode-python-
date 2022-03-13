@@ -1,6 +1,5 @@
 from shutil import copy
 from config_manager import ConfigManager
-import pathlib
 import os
 
 class CreateConfig:
@@ -37,8 +36,7 @@ class CreateConfig:
 			print(e)
 			exit(1)
 	
-	# TODO: make a copy file
-	# get a path of workspaces
+	
 	def add_config_json(self, file, name) -> None:
 		try:
 			path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "workspaces")
@@ -52,6 +50,18 @@ class CreateConfig:
 			
 			copy(file, file_path)
 			ConfigManager(name, file_path).add()
+
+		except Exception as e:
+			print(e)
+			exit(1)
+	
+	def remove_config_json(self, name) -> None:
+		try:
+			path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wokspaces")
+
+			remove = ConfigManager().remove(name)
+			
+			os.remove(remove)
 
 		except Exception as e:
 			print(e)
