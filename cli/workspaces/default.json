@@ -1,5 +1,7 @@
 {
   "editor.tabSize": 4,
   "editor.detectIndentation": true,
-  "editor.fontSize": 16
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on"
 }

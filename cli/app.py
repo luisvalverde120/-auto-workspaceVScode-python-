@@ -1,6 +1,7 @@
 """
 	cli aplication to create preference workspace in vscode
 	default make a dir to work
+	save a file json in workspaces and add a name
 """
 
 import argparse
@@ -12,8 +13,8 @@ def cli():
 		description='create a workspace vscode implementation in python',
 	)
 	parser.add_argument(
-		"-n", "--namedir",
-		required=True,
+		"-d", "--dir",
+		required=False,
 		help="Name of dir to workspace"
 	)
 	parser.add_argument(
@@ -28,14 +29,28 @@ def cli():
 		action="store_true",
 		help="initizlization of git and create .gitignore"	
 	)
+	parser.add_argument(
+		"--add",
+		required=False,
+		help="add a file config vscode"
+	)
+	parser.add_argument(
+		"--list",
+		required=False,
+		help="Get a list of name of configs exists",
+		action="store_true"
+	)
+	parser.add_argument(
+		"--name",
+		required=False,
+		help="name of config [add, update, delete]"
+	)
 	return parser.parse_args()
 
-
 def main():
-	argv = cli()
-	config = CreateConfig(argv.namedir)
-	config.makeSettingVScode()
-
+	args = cli()
+	conf = CreateConfig()
+	conf.add_config_json(args.add, args.name)
 
 if __name__ == '__main__':
 	main()
