@@ -42,5 +42,10 @@ class ConfigManager:
 		
 		return path_file
 
-	def getConfigs(self) -> None:
-		pass
+	def list_configs(self) -> any:
+		path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", self.file)
+
+		with open(path, "r") as f:
+			data = json.load(f)
+		
+		return data

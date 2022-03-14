@@ -67,3 +67,10 @@ class CreateConfig:
 			print(e)
 			exit(1)
 
+	def list_config_json(self) -> None:
+		data = ConfigManager().list_configs()
+
+		print("List configs: \n")
+
+		for i in data:
+			print(i)

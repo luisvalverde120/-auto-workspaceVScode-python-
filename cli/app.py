@@ -60,8 +60,10 @@ def cli():
 def main():
 	args = cli()
 	conf = CreateConfig()
-	conf.remove_config_json(args.remove)
+	#conf.remove_config_json(args.remove)
 	#conf.add_config_json(args.add, args.name)
+	if (args.list == True):
+		conf.list_config_json()
 
 if __name__ == '__main__':
 	main()
