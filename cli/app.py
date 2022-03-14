@@ -2,15 +2,10 @@
 	cli aplication to create preference workspace in vscode
 	default make a dir to work
 	save a file json in workspaces and add a name
-	TODO: add in new proget 
-	TODO: -g initialization file .gitignore
-	TODO: --list list the configs with name and path
 	TODO: hacer una funcion para ejecutar los comandos por medio de condicionales
-	TODO: hacer que el paramatro add funcione si se incluye el parametro name
 """
 
 import argparse
-from urllib import request
 from files_manager import CreateConfig
 
 def cli(): 
@@ -20,9 +15,9 @@ def cli():
 	)
 	parser.add_argument(
 		"--start",
-		help="Initialization config vscode",
-		nargs=1,
-		metavar=("dir"),
+		help="Initialization config vscode this need a dir to workspace",
+		nargs=2,
+		metavar=("dir", "name"),
 		required=False
 	)
 	parser.add_argument(
@@ -37,9 +32,10 @@ def cli():
 		help='create directory for work in new project'
 	)
 	parser.add_argument(
-		"-g", "-gitinit", 
+		"-g", "--gitinit", 
 		required=False,
 		action="store_true",
+		default=False,
 		help="initizlization of git and create .gitignore"	
 	)
 	parser.add_argument(
@@ -69,21 +65,22 @@ def main():
 	#conf.remove_config_json(args.remove)
 	#conf.add_config_json(args.add, args.name)
 
-	if (len(args.start) >= 1):
-		conf.make_setting_VScode(args.start[0])
-		return
+	if (args.start != None):
+		conf.make_setting_VScode(args.start[0], args.start[1])
 
 	if (args.list == True):
 		conf.list_config_json()
-		return
 
-	if (len(args.add) >= 2):
+	if (args.add != None):
 		conf.add_config_json(args.add[0], args.add[1])
-		return
 	
-	if (len(args.remove) >= 1):
+	if (args.remove != None):
 		conf.remove_config_json(args.remove[0])
-		return
+
+	print(args)
+
+	if (args.gitinit == True):
+		conf.init_git()
 
 if __name__ == '__main__':
 	main()
