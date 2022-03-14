@@ -34,4 +34,13 @@ class ConfigManager:
 		for i in range(len(data)):
 			if data[i]["name"] == name:
 				path_file = data[i]["path"]
-				return path_file
+				data.pop(i)
+				break
+		
+		with open(path, "w") as f:
+			json.dump(data, f)
+		
+		return path_file
+
+	def getConfigs(self) -> None:
+		pass

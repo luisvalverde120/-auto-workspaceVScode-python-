@@ -1,8 +1,1 @@
-[
-  { "name": "default", "path": "./cli/workspaces/default.json" },
-  { "name": "default-js", "path": "./cli/workspaces/javascript-config.json" },
-  {
-    "name": "test",
-    "path": "C:\\Users\\develop\\Desktop\\cli-workspace\\cli\\workspaces\\test.json"
-  }
-]
+[{"name": "default", "path": "./cli/workspaces/default.json"}, {"name": "default-js", "path": "./cli/workspaces/javascript-config.json"}]
