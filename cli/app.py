@@ -10,12 +10,20 @@
 """
 
 import argparse
+from urllib import request
 from files_manager import CreateConfig
 
 def cli(): 
 	parser = argparse.ArgumentParser(
 		prog='workspacePy',
 		description='create a workspace vscode implementation in python',
+	)
+	parser.add_argument(
+		"--start",
+		help="Initialization config vscode",
+		nargs=1,
+		metavar=("dir"),
+		required=False
 	)
 	parser.add_argument(
 		"-d", "--dir",
@@ -37,11 +45,14 @@ def cli():
 	parser.add_argument(
 		"--add",
 		required=False,
-		help="add a file config vscode"
+		help="add a file config vscode",
+		nargs=2,
+		metavar=("file", "name"),
 	)
 	parser.add_argument(
 		"--remove",
-		required=False,
+		nargs=1,
+		metavar=("name_config"),
 		help="remove config with name"
 	)
 	parser.add_argument(
@@ -50,11 +61,6 @@ def cli():
 		help="Get a list of name of configs exists",
 		action="store_true"
 	)
-	parser.add_argument(
-		"--name",
-		required=False,
-		help="name of config [add, update, delete]"
-	)
 	return parser.parse_args()
 
 def main():
@@ -62,8 +68,22 @@ def main():
 	conf = CreateConfig()
 	#conf.remove_config_json(args.remove)
 	#conf.add_config_json(args.add, args.name)
+
+	if (len(args.start) >= 1):
+		conf.make_setting_VScode(args.start[0])
+		return
+
 	if (args.list == True):
 		conf.list_config_json()
+		return
+
+	if (len(args.add) >= 2):
+		conf.add_config_json(args.add[0], args.add[1])
+		return
+	
+	if (len(args.remove) >= 1):
+		conf.remove_config_json(args.remove[0])
+		return
 
 if __name__ == '__main__':
 	main()

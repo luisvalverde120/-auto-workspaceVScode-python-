@@ -3,15 +3,16 @@ from config_manager import ConfigManager
 import os
 
 class CreateConfig:
-	def __init__(self, name_dir: str = "") -> None:
+	def __init__(self ) -> None:
 		self.name_file = "settings.json"
-		self.name_dir = name_dir
+		self.name_dir = "" 
 		self.config: str = "" 
 		self.path_configs = "workspaces"
 	
+	# TODO get a param to name a config
 	def get_data_configs(self) -> None:
 		try:
-			path = os.path.join(os.getcwd(), "workspaces", "default.json")
+			path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "workspaces", "default.json")
 			with open(path, "r") as f:
 				self.config = f.read()
 
@@ -19,8 +20,11 @@ class CreateConfig:
 			print(e)
 			exit(1)
 
-	def make_setting_VScode(self) -> None:
+	# TODO modify and add name to use the diferents configs
+	def make_setting_VScode(self, name_dir) -> None:
 		# create files
+		self.name_dir = name_dir
+		
 		try:
 			path = os.path.join(os.getcwd(), self.name_dir, ".vscode")
 			os.mkdir(path)
@@ -35,7 +39,6 @@ class CreateConfig:
 		except Exception as e: 
 			print(e)
 			exit(1)
-	
 	
 	def add_config_json(self, file, name) -> None:
 		try:
