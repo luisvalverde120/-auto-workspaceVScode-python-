@@ -28,6 +28,5 @@ def add_path_configs():
 	with open(file_config, "w") as f:
 		json.dump(data, f)
 
-
 if __name__ == "__main__":
 	add_path_configs()	

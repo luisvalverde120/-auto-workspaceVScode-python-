@@ -2,7 +2,7 @@
 	cli aplication to create preference workspace in vscode
 	default make a dir to work
 	save a file json in workspaces and add a name
-	TODO: hacer una funcion para ejecutar los comandos por medio de condicionales
+	TODO: create chapter
 """
 
 import argparse
@@ -21,13 +21,9 @@ def cli():
 		required=False
 	)
 	parser.add_argument(
-		"-d", "--dir",
-		required=False,
-		help="Name of dir to workspace"
-	)
-	parser.add_argument(
-		"-np", "--newproject",
+		"-m", "--makedir",
 		action="store_true",
+		default=False,
 		required=False,
 		help='create directory for work in new project'
 	)
@@ -62,11 +58,9 @@ def cli():
 def main():
 	args = cli()
 	conf = CreateConfig()
-	#conf.remove_config_json(args.remove)
-	#conf.add_config_json(args.add, args.name)
 
 	if (args.start != None):
-		conf.make_setting_VScode(args.start[0], args.start[1])
+		conf.make_setting_VScode(args.start[0], args.start[1], args.makedir)
 
 	if (args.list == True):
 		conf.list_config_json()
@@ -77,10 +71,11 @@ def main():
 	if (args.remove != None):
 		conf.remove_config_json(args.remove[0])
 
-	print(args)
-
 	if (args.gitinit == True):
-		conf.init_git()
+		if (args.start != None):
+			conf.init_git(args.start[0])
+		else:
+			conf.init_git()
 
 if __name__ == '__main__':
 	main()
